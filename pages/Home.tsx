@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 
   const resolveImageUrl = (url?: string) => {
     if (!url) return '';
-    if (url.startsWith('http')) return url;
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
     const cleaned = url.startsWith('/') ? url.slice(1) : url;
     return `${import.meta.env.BASE_URL}${cleaned}`;
   };
@@ -36,28 +36,33 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden bg-black text-white">
 
-      {/* ================= HERO ================= */}
+      {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+
+          {/* HERO IMAGE — HARD PUSH DOWN */}
           <img
             src={`${import.meta.env.BASE_URL}images/hero/home-hero.png`}
             alt="Positive Energy Dance Company"
             className="
+              absolute inset-0
               w-full h-full
               object-cover
-              object-[50%_85%]
+              object-[50%_100%]
+              translate-y-[20%]
               opacity-60
               animate-[kenburns_30s_ease-in-out_infinite]
             "
           />
+
+          {/* Cinematic overlays */}
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40"></div>
           <div className="absolute inset-0 bg-black/30"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl">
-
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-400/10 border border-primary-400/30 text-primary-400 text-[10px] font-black uppercase tracking-[0.4em] mb-10 backdrop-blur-xl">
               <Zap size={14} className="fill-primary-400" />
               San Diego&apos;s Premier Dance Company
@@ -75,14 +80,14 @@ const Home: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-5 mb-16">
               <Link
                 to="/lessons"
-                className="px-12 py-6 bg-primary-400 text-black font-black rounded-full flex items-center justify-center gap-3 text-xs uppercase tracking-widest hover:bg-white transition-all"
+                className="px-12 py-6 bg-primary-400 hover:bg-white text-black font-black rounded-full flex items-center justify-center gap-3 text-xs uppercase tracking-widest hover:scale-105 transition-all"
               >
                 Start Dancing <ArrowRight className="w-5 h-5" />
               </Link>
 
               <Link
                 to="/book"
-                className="px-12 py-6 bg-white/5 text-white font-black rounded-full backdrop-blur-md border border-white/20 flex items-center justify-center gap-3 text-xs uppercase tracking-widest hover:bg-white/20 transition-all"
+                className="px-12 py-6 bg-white/5 hover:bg-white/20 text-white font-black rounded-full backdrop-blur-md border border-white/20 flex items-center justify-center gap-3 text-xs uppercase tracking-widest transition-all"
               >
                 Book for Event
               </Link>
@@ -96,70 +101,49 @@ const Home: React.FC = () => {
                 <span className="block text-[8px] font-black uppercase tracking-[0.5em] text-primary-400/70">
                   Connect with Michael
                 </span>
-                <a
-                  href="tel:6192518863"
-                  className="text-xl font-black uppercase tracking-[0.1em] hover:text-primary-400 transition-colors"
-                >
+                <a href="tel:6192518863" className="text-xl font-black uppercase tracking-[0.1em] hover:text-primary-400">
                   (619) 251-8863
                 </a>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
       {/* ================= SERVICES ================= */}
       <section className="py-32 bg-black border-t border-white/5">
-        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
-          <Link to="/lessons" className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all">
-            <Users className="text-primary-400 w-8 h-8 mb-6" />
-            <h3 className="text-2xl font-bold mb-3">Dance Lessons</h3>
-            <p className="text-zinc-500 text-sm">Salsa, Bachata, Tango & more.</p>
-          </Link>
-
-          <Link to="/events-entertainment" className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all">
-            <Building2 className="text-primary-400 w-8 h-8 mb-6" />
-            <h3 className="text-2xl font-bold mb-3">Corporate Events</h3>
-            <p className="text-zinc-500 text-sm">Entertainment that elevates your brand.</p>
-          </Link>
-
-          <Link to="/weddings" className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all">
-            <Heart className="text-primary-400 w-8 h-8 mb-6" />
-            <h3 className="text-2xl font-bold mb-3">Wedding Dance</h3>
-            <p className="text-zinc-500 text-sm">Unforgettable first dances.</p>
-          </Link>
-
-          <Link to="/book" className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all">
-            <User className="text-primary-400 w-8 h-8 mb-6" />
-            <h3 className="text-2xl font-bold mb-3">Private Lessons</h3>
-            <p className="text-zinc-500 text-sm">1-on-1 tailored coaching.</p>
-          </Link>
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tighter">
+            Elevate Your <span className="text-primary-400">Experience</span>
+          </h2>
+          <p className="text-zinc-500 max-w-2xl mx-auto">
+            Whether you're learning, celebrating, or entertaining — we deliver unforgettable energy.
+          </p>
         </div>
       </section>
 
       {/* ================= FEATURED EVENTS ================= */}
       <section className="py-32 bg-zinc-950 border-t border-white/5">
         <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-black uppercase tracking-tighter mb-16 text-center">
+            Upcoming <span className="text-primary-400">Highlights</span>
+          </h2>
+
           {featuredEvents.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-10">
               {featuredEvents.map(event => (
-                <div key={event.id} className="rounded-3xl overflow-hidden border border-white/5">
+                <div key={event.id} className="rounded-3xl overflow-hidden border border-white/10">
                   <img
                     src={resolveImageUrl(event.flyerUrl)}
-                    alt={event.title}
                     className="w-full h-96 object-cover"
+                    alt={event.title}
                   />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                    <p className="text-zinc-500 text-sm">{event.description}</p>
-                  </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-center text-zinc-500 uppercase tracking-widest text-xs">
-              No featured events yet
+            <p className="text-center text-zinc-500">
+              No featured events yet.
             </p>
           )}
         </div>
@@ -168,9 +152,9 @@ const Home: React.FC = () => {
       {/* ================= ANIMATION ================= */}
       <style>{`
         @keyframes kenburns {
-          0% { transform: scale(1) translate(0,0); }
-          50% { transform: scale(1.1) translate(-1%,-1%); }
-          100% { transform: scale(1) translate(0,0); }
+          0% { transform: scale(1) translateY(0); }
+          50% { transform: scale(1.1) translateY(-2%); }
+          100% { transform: scale(1) translateY(0); }
         }
       `}</style>
 
