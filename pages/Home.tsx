@@ -35,7 +35,6 @@ const Home: React.FC = () => {
     if (!url) return '';
     if (url.startsWith('http://') || url.startsWith('https://')) return url;
 
-    // Handle "/images/..." and "images/..."
     const cleaned = url.startsWith('/') ? url.slice(1) : url;
     return `${import.meta.env.BASE_URL}${cleaned}`;
   };
@@ -49,7 +48,7 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={`${import.meta.env.BASE_URL}images/hero/home-hero.png`}
-            className="w-full h-full object-cover object-[50%_70%] opacity-60 scale-100 animate-[kenburns_30s_ease-in-out_infinite]"
+            className="w-full h-full object-cover object-[50%_60%] opacity-60 scale-100 animate-[kenburns_30s_ease-in-out_infinite]"
             alt="Positive Energy Dance Company"
           />
 
@@ -266,7 +265,8 @@ const Home: React.FC = () => {
             <div className="rounded-3xl border border-white/10 bg-black/40 p-10 text-center">
               <p className="text-zinc-300 font-bold uppercase tracking-widest text-xs mb-3">No featured events yet</p>
               <p className="text-zinc-500 max-w-xl mx-auto">
-                Add events in the Admin Dashboard and mark them as featured (or set default featured events in <span className="text-zinc-300 font-semibold">firebase.ts</span>).
+                Add events in the Admin Dashboard and mark them as featured (or set default featured events in{' '}
+                <span className="text-zinc-300 font-semibold">firebase.ts</span>).
               </p>
             </div>
           )}
@@ -306,7 +306,6 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Decorative glows */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-primary-400/5 blur-[120px] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-400/5 blur-[150px] rounded-full pointer-events-none"></div>
       </section>
