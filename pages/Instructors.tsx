@@ -10,35 +10,58 @@ const Instructors: React.FC = () => {
   const [errorIds, setErrorIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    db.instructors.getAll().then(data => {
-      setInstructors(data);
-      setLoading(false);
-    }).catch(() => {
-      setInstructors([]);
-      setLoading(false);
-    });
+    db.instructors
+      .getAll()
+      .then((data) => {
+        setInstructors(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setInstructors([]);
+        setLoading(false);
+      });
   }, []);
 
-  // ✅ Same method as Hero: use BASE_URL so GitHub Pages works
+  // ✅ Same method as Hero: GitHub Pages safe base path
   const BASE = import.meta.env.BASE_URL;
 
-  // ✅ Hardcoded local images (your exact file names)
-  // Make sure these files exist in: public/images/instructors/
+  // ✅ Hardcoded local images (your updated filenames)
+  // Put these files in: public/images/instructors/
   const INSTRUCTOR_IMAGES: Record<string, string> = {
     'anjali': `${BASE}images/instructors/Anjali.png`,
-    'cat&chuck': `${BASE}images/instructors/Cat&Chuck.jpg`,
-    'michael j saltus': `${BASE}images/instructors/michaeljsaltus.jpg`,
     'sinai': `${BASE}images/instructors/sinai.jpg`,
+    'cat chuck': `${BASE}images/instructors/catchuck.jpg`,
+    'michael j saltus': `${BASE}images/instructors/michael.jpg`,
   };
 
-  // ✅ This is the "hero style" logic: return local path only
+  // Normalize names so "Michael J. Saltus" matches "michael j saltus"
+  const normalizeNameKey = (name: string) => {
+    return (name || '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s]/g, '')   // remove punctuation like "." "&" etc
+      .replace(/\s+/g, ' ');     // collapse multiple spaces
+  };
+
+  // Hero-style: always return a local image path (no external links)
   const getInstructorPhoto = (inst: Instructor) => {
-    const key = (inst.name || '').trim().toLowerCase();
-    return INSTRUCTOR_IMAGES[key] || `${BASE}images/instructors/Anjali.png`; // fallback to something local
+    const key = normalizeNameKey(inst.name);
+
+    // Direct match
+    if (INSTRUCTOR_IMAGES[key]) return INSTRUCTOR_IMAGES[key];
+
+    // Soft matching fallback (in case names vary slightly)
+    if (key.includes('anjali')) return `${BASE}images/instructors/Anjali.png`;
+    if (key.includes('sinai')) return `${BASE}images/instructors/sinai.jpg`;
+    if (key.includes('cat') || key.includes('chuck')) return `${BASE}images/instructors/catchuck.jpg`;
+    if (key.includes('michael') || key.includes('saltus')) return `${BASE}images/instructors/michael.jpg`;
+
+    // Final fallback (still local)
+    return `${BASE}images/instructors/Anjali.png`;
   };
 
   const handleImageError = (id: string, e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    setErrorIds(prev => {
+    setErrorIds((prev) => {
       const newSet = new Set(prev);
       newSet.add(id);
       return newSet;
@@ -46,7 +69,7 @@ const Instructors: React.FC = () => {
 
     const target = e.currentTarget;
 
-    // ✅ Local fallback instead of Unsplash (still "hero style")
+    // Local fallback (no external)
     target.src = `${BASE}images/instructors/Anjali.png`;
     console.warn(`Instructor image (ID: ${id}) failed to load.`);
   };
@@ -88,7 +111,7 @@ const Instructors: React.FC = () => {
                         Image Failed to Load
                       </p>
                       <p className="text-[9px] text-zinc-400 uppercase tracking-wider leading-relaxed">
-                        Check that the file exists in public/images/instructors/
+                        Check the file exists in public/images/instructors/
                       </p>
                     </div>
                   )}
@@ -110,26 +133,33 @@ const Instructors: React.FC = () => {
                         {inst.role}
                       </p>
                     </div>
+
                     {inst.instagram && (
-                      <a href={inst.instagram} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+                      <a
+                        href={inst.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-500 hover:text-white transition-colors"
+                      >
                         <Instagram size={20} />
                       </a>
                     )}
                   </div>
 
-                  <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3">
-                    {inst.bio}
-                  </p>
+                  <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3">{inst.bio}</p>
 
                   <div className="flex flex-wrap gap-2 pt-2">
-                    {inst.styles.map(style => (
-                      <span key={style} className="px-3 py-1 rounded-full border border-white/5 bg-zinc-950 text-[9px] font-black uppercase tracking-widest text-zinc-600">
+                    {inst.styles.map((style) => (
+                      <span
+                        key={style}
+                        className="px-3 py-1 rounded-full border border-white/5 bg-zinc-950 text-[9px] font-black uppercase tracking-widest text-zinc-600"
+                      >
                         {style}
                       </span>
                     ))}
                   </div>
-
                 </div>
+
               </div>
             ))}
           </div>
