@@ -32,11 +32,17 @@ const Home: React.FC = () => {
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* ✅ GitHub Pages SAFE image path */}
+          {/* ✅ GitHub Pages SAFE image path + crop focus adjustment */}
           <img
             src={`${import.meta.env.BASE_URL}images/hero/home-hero.png`}
             alt="Positive Energy Dance Company"
-            className="w-full h-full object-cover opacity-60 animate-[kenburns_30s_ease-in-out_infinite]"
+            className="
+              w-full h-full
+              object-cover
+              object-[50%_20%]
+              opacity-60
+              animate-[kenburns_30s_ease-in-out_infinite]
+            "
           />
 
           {/* Cinematic overlays */}
@@ -99,9 +105,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* ================= REST OF PAGE UNCHANGED ================= */}
-      {/* Services, Events, Partners, etc. stay exactly as you had them */}
 
       <style>{`
         @keyframes kenburns {
