@@ -28,8 +28,8 @@ const Home: React.FC = () => {
 
   /**
    * GitHub Pages + Vite base-path safe image resolver:
-   * - If the URL is absolute (https://...), return as-is.
-   * - If the URL is local (/images/...), convert to BASE_URL + images/...
+   * - If URL is absolute (https://...), return as-is.
+   * - If URL is local (/images/...), convert to BASE_URL + images/...
    */
   const resolveImageUrl = (url?: string) => {
     if (!url) return '';
@@ -42,6 +42,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="overflow-hidden bg-black text-white">
+
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
         {/* Cinematic Background Layer */}
@@ -51,6 +52,7 @@ const Home: React.FC = () => {
             className="w-full h-full object-cover object-[50%_70%] opacity-60 scale-100 animate-[kenburns_30s_ease-in-out_infinite]"
             alt="Positive Energy Dance Company"
           />
+
           {/* Multi-layered gradients for cinematic text pop */}
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30"></div>
@@ -132,45 +134,73 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Link to="/lessons" className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all hover:-translate-y-2">
+            <Link
+              to="/lessons"
+              className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all hover:-translate-y-2"
+            >
               <div className="w-16 h-16 bg-primary-400/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary-400/20 transition-colors">
                 <Users className="text-primary-400 w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">Take Dance Lessons</h3>
-              <p className="text-zinc-500 text-sm leading-relaxed mb-8">Join our vibrant community. From Salsa to Bachata, classes are beginner-friendly and full of energy.</p>
+              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">
+                Take Dance Lessons
+              </h3>
+              <p className="text-zinc-500 text-sm leading-relaxed mb-8">
+                Join our vibrant community. From Salsa to Bachata, classes are beginner-friendly and full of energy.
+              </p>
               <div className="flex items-center gap-2 text-primary-400 font-bold text-xs uppercase tracking-widest">
                 View Schedule <ChevronRight className="w-4 h-4" />
               </div>
             </Link>
 
-            <Link to="/events-entertainment" className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all hover:-translate-y-2">
+            <Link
+              to="/events-entertainment"
+              className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all hover:-translate-y-2"
+            >
               <div className="w-16 h-16 bg-primary-400/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary-400/20 transition-colors">
                 <Building2 className="text-primary-400 w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">Corporate Events</h3>
-              <p className="text-zinc-500 text-sm leading-relaxed mb-8">Boost morale and foster team building with professional dance performances and workshops.</p>
+              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">
+                Corporate Events
+              </h3>
+              <p className="text-zinc-500 text-sm leading-relaxed mb-8">
+                Boost morale and foster team building with professional dance performances and workshops.
+              </p>
               <div className="flex items-center gap-2 text-primary-400 font-bold text-xs uppercase tracking-widest">
                 Book for Corporate <ChevronRight className="w-4 h-4" />
               </div>
             </Link>
 
-            <Link to="/weddings" className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all hover:-translate-y-2">
+            <Link
+              to="/weddings"
+              className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all hover:-translate-y-2"
+            >
               <div className="w-16 h-16 bg-primary-400/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary-400/20 transition-colors">
                 <Heart className="text-primary-400 w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">Wedding Dance</h3>
-              <p className="text-zinc-500 text-sm leading-relaxed mb-8">Make your first dance unforgettable with custom choreography that matches your unique style.</p>
+              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">
+                Wedding Dance
+              </h3>
+              <p className="text-zinc-500 text-sm leading-relaxed mb-8">
+                Make your first dance unforgettable with custom choreography that matches your unique style.
+              </p>
               <div className="flex items-center gap-2 text-primary-400 font-bold text-xs uppercase tracking-widest">
                 Wedding Packages <ChevronRight className="w-4 h-4" />
               </div>
             </Link>
 
-            <Link to="/book" className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all hover:-translate-y-2">
+            <Link
+              to="/book"
+              className="group p-10 rounded-[2rem] bg-zinc-900/30 border border-white/5 hover:border-primary-400/40 transition-all hover:-translate-y-2"
+            >
               <div className="w-16 h-16 bg-primary-400/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary-400/20 transition-colors">
                 <User className="text-primary-400 w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">Private Lessons</h3>
-              <p className="text-zinc-500 text-sm leading-relaxed mb-8">Accelerate your progress with 1-on-1 coaching tailored specifically to your goals and skill level.</p>
+              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary-400 transition-colors">
+                Private Lessons
+              </h3>
+              <p className="text-zinc-500 text-sm leading-relaxed mb-8">
+                Accelerate your progress with 1-on-1 coaching tailored specifically to your goals and skill level.
+              </p>
               <div className="flex items-center gap-2 text-primary-400 font-bold text-xs uppercase tracking-widest">
                 Get a Quote <ChevronRight className="w-4 h-4" />
               </div>
@@ -187,12 +217,12 @@ const Home: React.FC = () => {
               <h2 className="text-4xl font-black mb-4 uppercase tracking-tighter">
                 Upcoming <span className="text-primary-400">Highlights</span>
               </h2>
-              <p className="text-zinc-500 max-w-lg">
-                Don&apos;t miss our latest workshops, socials, and parties.
-              </p>
+              <p className="text-zinc-500 max-w-lg">Don&apos;t miss our latest workshops, socials, and parties.</p>
             </div>
-
-            <Link to="/events-entertainment" className="flex items-center gap-2 text-primary-400 font-bold hover:text-white transition-all uppercase tracking-widest text-xs">
+            <Link
+              to="/events-entertainment"
+              className="flex items-center gap-2 text-primary-400 font-bold hover:text-white transition-all uppercase tracking-widest text-xs"
+            >
               View All Events <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -200,7 +230,10 @@ const Home: React.FC = () => {
           {featuredEvents.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-10">
               {featuredEvents.map(event => (
-                <div key={event.id} className="group relative rounded-3xl overflow-hidden glass border-white/5 hover:border-primary-400/30 transition-all shadow-2xl">
+                <div
+                  key={event.id}
+                  className="group relative rounded-3xl overflow-hidden glass border-white/5 hover:border-primary-400/30 transition-all shadow-2xl"
+                >
                   <div className="aspect-[4/5] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
                     <img
                       src={resolveImageUrl(event.flyerUrl)}
@@ -210,8 +243,12 @@ const Home: React.FC = () => {
                   </div>
                   <div className="p-8 bg-gradient-to-t from-black via-black/90 to-transparent">
                     <div className="flex items-center gap-4 text-[10px] text-primary-400 font-black uppercase tracking-[0.2em] mb-4">
-                      <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> {event.date}</span>
-                      <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> {event.location}</span>
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-3.5 h-3.5" /> {event.date}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5" /> {event.location}
+                      </span>
                     </div>
                     <h3 className="text-2xl font-bold mb-4">{event.title}</h3>
                     <p className="text-sm text-zinc-500 line-clamp-2 mb-8 leading-relaxed">{event.description}</p>
@@ -229,14 +266,14 @@ const Home: React.FC = () => {
             <div className="rounded-3xl border border-white/10 bg-black/40 p-10 text-center">
               <p className="text-zinc-300 font-bold uppercase tracking-widest text-xs mb-3">No featured events yet</p>
               <p className="text-zinc-500 max-w-xl mx-auto">
-                Add events in the Admin Dashboard and mark them as featured, or update your default events in <span className="text-zinc-300 font-semibold">firebase.ts</span>.
+                Add events in the Admin Dashboard and mark them as featured (or set default featured events in <span className="text-zinc-300 font-semibold">firebase.ts</span>).
               </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* ================= TRUSTED PARTNERS ================= */}
+      {/* ================= TRUSTED PARTNERS SECTION ================= */}
       <section className="py-32 bg-black border-t border-white/5 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
@@ -251,7 +288,10 @@ const Home: React.FC = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
             {TRUSTED_PARTNERS.map((partner, idx) => (
-              <div key={idx} className="group p-8 rounded-[2rem] bg-zinc-900/20 border border-white/5 hover:border-primary-400/30 transition-all flex flex-col items-center justify-center text-center hover:-translate-y-1">
+              <div
+                key={idx}
+                className="group p-8 rounded-[2rem] bg-zinc-900/20 border border-white/5 hover:border-primary-400/30 transition-all flex flex-col items-center justify-center text-center hover:-translate-y-1"
+              >
                 <div className="w-12 h-12 bg-primary-400/5 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-400/10 transition-colors">
                   <Star className="text-primary-400/40 w-5 h-5 group-hover:text-primary-400 transition-colors" />
                 </div>
@@ -266,6 +306,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
+        {/* Decorative glows */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-primary-400/5 blur-[120px] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-400/5 blur-[150px] rounded-full pointer-events-none"></div>
       </section>
@@ -278,7 +319,9 @@ const Home: React.FC = () => {
               <Star className="text-primary-400 w-10 h-10" />
             </div>
             <h3 className="text-xl font-bold mb-4 uppercase tracking-wider">World Class Instruction</h3>
-            <p className="text-zinc-500 leading-relaxed">Learn from champions and experts with decades of professional performance experience.</p>
+            <p className="text-zinc-500 leading-relaxed">
+              Learn from champions and experts with decades of professional performance experience.
+            </p>
           </div>
 
           <div className="text-center group">
@@ -286,7 +329,9 @@ const Home: React.FC = () => {
               <Heart className="text-primary-400 w-10 h-10" />
             </div>
             <h3 className="text-xl font-bold mb-4 uppercase tracking-wider">Community Focused</h3>
-            <p className="text-zinc-500 leading-relaxed">Join a family of dancers who support each other&apos;s growth on and off the dance floor.</p>
+            <p className="text-zinc-500 leading-relaxed">
+              Join a family of dancers who support each other&apos;s growth on and off the dance floor.
+            </p>
           </div>
 
           <div className="text-center group">
@@ -294,11 +339,14 @@ const Home: React.FC = () => {
               <Play className="text-primary-400 w-10 h-10" />
             </div>
             <h3 className="text-xl font-bold mb-4 uppercase tracking-wider">Event Mastery</h3>
-            <p className="text-zinc-500 leading-relaxed">From festivals to corporate galas, we bring the energy that makes every event legendary.</p>
+            <p className="text-zinc-500 leading-relaxed">
+              From festivals to corporate galas, we bring the energy that makes every event legendary.
+            </p>
           </div>
         </div>
       </section>
 
+      {/* ================= ANIMATIONS ================= */}
       <style>{`
         @keyframes kenburns {
           0% { transform: scale(1) translate(0, 0); }
