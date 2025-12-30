@@ -32,14 +32,15 @@ const Home: React.FC = () => {
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* ✅ GitHub Pages SAFE image path + crop focus adjustment */}
+
+          {/* HERO IMAGE — pushed DOWN hard */}
           <img
             src={`${import.meta.env.BASE_URL}images/hero/home-hero.png`}
             alt="Positive Energy Dance Company"
             className="
               w-full h-full
               object-cover
-              object-[50%_20%]
+              object-[50%_70%]
               opacity-60
               animate-[kenburns_30s_ease-in-out_infinite]
             "
