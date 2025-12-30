@@ -1,16 +1,15 @@
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  Calendar, 
-  MapPin, 
-  Star, 
-  Play, 
-  Heart, 
-  Users, 
-  Building2, 
-  User, 
+import {
+  ArrowRight,
+  Calendar,
+  MapPin,
+  Star,
+  Play,
+  Heart,
+  Users,
+  Building2,
+  User,
   ChevronRight,
   Phone,
   Zap,
@@ -33,10 +32,11 @@ const Home: React.FC = () => {
       <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
         {/* Cinematic Background Layer */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=1920" 
+          {/* ✅ CHANGED: local hero image */}
+          <img
+            src="/images/hero/home-hero.png"
             className="w-full h-full object-cover opacity-60 scale-100 animate-[kenburns_30s_ease-in-out_infinite]"
-            alt="San Diego Dance Energy"
+            alt="Positive Energy Dance Company"
           />
           {/* Multi-layered gradients for cinematic text pop */}
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
@@ -51,16 +51,16 @@ const Home: React.FC = () => {
               <Zap size={14} className="fill-primary-400" />
               San Diego's Premier Dance Company
             </div>
-            
+
             <h1 className="text-6xl md:text-9xl font-serif font-black mb-8 leading-[0.85] tracking-tighter drop-shadow-2xl animate-in fade-in slide-in-from-left-6 duration-1000 delay-100">
               Dance with <br />
               <span className="text-primary-400 italic">Positive Energy</span>
             </h1>
-            
+
             <p className="max-w-2xl text-xl md:text-2xl text-zinc-100 mb-12 leading-relaxed font-light drop-shadow-lg animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
               Experience the rhythm of San Diego. Professional Latin dance lessons, breathtaking wedding choreography, and elite event entertainment.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-5 mb-16 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
               <Link to="/lessons" className="px-12 py-6 bg-primary-400 hover:bg-white text-black font-black rounded-full transition-all flex items-center justify-center gap-3 text-xs uppercase tracking-widest shadow-[0_0_50px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95">
                 Start Dancing <ArrowRight className="w-5 h-5" />
@@ -164,9 +164,9 @@ const Home: React.FC = () => {
               {featuredEvents.map(event => (
                 <div key={event.id} className="group relative rounded-3xl overflow-hidden glass border-white/5 hover:border-primary-400/30 transition-all shadow-2xl">
                   <div className="aspect-[4/5] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                    <img 
-                      src={event.flyerUrl} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    <img
+                      src={event.flyerUrl}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       alt={event.title}
                     />
                   </div>
@@ -177,8 +177,8 @@ const Home: React.FC = () => {
                     </div>
                     <h3 className="text-2xl font-bold mb-4">{event.title}</h3>
                     <p className="text-sm text-zinc-500 line-clamp-2 mb-8 leading-relaxed">{event.description}</p>
-                    <a 
-                      href={event.ticketLink || '#'} 
+                    <a
+                      href={event.ticketLink || '#'}
                       className="inline-block w-full text-center py-4 rounded-xl border border-primary-400/30 text-primary-400 text-xs font-black uppercase tracking-widest hover:bg-primary-400 hover:text-black transition-all"
                     >
                       TICKETS & INFO
@@ -216,7 +216,7 @@ const Home: React.FC = () => {
             ))}
           </div>
         </div>
-        
+
         {/* Subtle Decorative Elements */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-primary-400/5 blur-[120px] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-400/5 blur-[150px] rounded-full pointer-events-none"></div>
@@ -248,7 +248,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-      
+
       <style>{`
         @keyframes kenburns {
           0% { transform: scale(1) translate(0, 0); }
