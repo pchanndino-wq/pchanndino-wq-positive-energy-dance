@@ -3,5 +3,18 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/pchanndino-wq-positive-energy-dance/",
+
+  // ✅ IMPORTANT: custom domain requires root base
+  base: "/",
+
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+    sourcemap: false,
+  },
+
+  server: {
+    port: 5173,
+    open: true,
+  },
 });
