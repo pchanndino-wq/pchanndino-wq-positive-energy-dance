@@ -1,141 +1,168 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  ArrowRight,
-  Calendar,
-  MapPin,
-  Star,
-  Play,
-  Heart,
-  Users,
-  Building2,
-  User,
-  ChevronRight,
-  Phone,
-  Zap,
-  Handshake
-} from 'lucide-react';
+import { Instagram, Zap, AlertCircle } from 'lucide-react';
 import { db } from '../firebase';
-import { Event } from '../types';
-import { TRUSTED_PARTNERS } from '../constants';
+import { Instructor } from '../types';
+import { resolveImageUrl } from '../utils';
 
-const Home: React.FC = () => {
-  const [featuredEvents, setFeaturedEvents] = useState<Event[]>([]);
+// Component to display the list of professional dance instructors
+const Instructors: React.FC = () => {
+  const [instructors, setInstructors] = useState<Instructor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [errorIds, setErrorIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    db.events.getFeatured().then(setFeaturedEvents).catch(() => setFeaturedEvents([]));
+    db.instructors
+      .getAll()
+      .then((data) => {
+        setInstructors(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setInstructors([]);
+        setLoading(false);
+      });
   }, []);
 
+  /**
+   * ✅ Local instructor photo mapping (GitHub Pages friendly)
+   * Put these files in: public/images/instructors/
+   */
+  const LOCAL_INSTRUCTOR_PHOTOS: Record<string, string> = {
+    // These keys should match instructor names (or common variations)
+    Anjali: '/images/instructors/Anjali.png',
+    Sinai: '/images/instructors/sinai.jpg',
+    'Cat&Chuck': '/images/instructors/Cat&Chuck.jpg',
+    'Cat & Chuck': '/images/instructors/Cat&Chuck.jpg',
+    Michael: '/images/instructors/michaeljsaltus.jpg',
+    'Michael J Saltus': '/images/instructors/michaeljsaltus.jpg',
+    'Michael Saltus': '/images/instructors/michaeljsaltus.jpg',
+  };
+
+  /**
+   * Choose local file first (if we can match), otherwise use inst.photoUrl
+   */
+  const getInstructorPhoto = (inst: Instructor) => {
+    // 1) exact match by name
+    const direct = LOCAL_INSTRUCTOR_PHOTOS[inst.name];
+    if (direct) return resolveImageUrl(direct);
+
+    // 2) soft match by keywords in name
+    const lower = (inst.name || '').toLowerCase();
+    if (lower.includes('anjali')) return resolveImageUrl('/images/instructors/Anjali.png');
+    if (lower.includes('sinai')) return resolveImageUrl('/images/instructors/sinai.jpg');
+    if (lower.includes('chuck') || lower.includes('cat')) return resolveImageUrl('/images/instructors/Cat&Chuck.jpg');
+    if (lower.includes('michael') || lower.includes('saltus')) return resolveImageUrl('/images/instructors/michaeljsaltus.jpg');
+
+    // 3) fallback to database URL (if you ever use it)
+    return resolveImageUrl(inst.photoUrl);
+  };
+
+  const handleImageError = (id: string, e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    setErrorIds((prev) => {
+      const newSet = new Set(prev);
+      newSet.add(id);
+      return newSet;
+    });
+
+    const target = e.currentTarget;
+    target.src = 'https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&q=80&w=800';
+    console.warn(`Instructor image (ID: ${id}) failed to load.`);
+  };
+
   return (
-    <div className="overflow-hidden bg-black text-white">
+    <div className="pt-32 bg-black min-h-screen text-white">
+      <div className="container mx-auto px-4 pb-32">
+        <header className="max-w-4xl mb-24 text-center mx-auto">
+          <span className="text-primary-400 font-black uppercase tracking-[0.3em] text-xs mb-4 block">Our Team</span>
+          <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-8">
+            Meet the <span className="text-primary-400">Masters</span>
+          </h1>
+          <p className="text-zinc-500 text-xl leading-relaxed max-w-2xl mx-auto">
+            World champions, performance artists, and technical experts dedicated to helping you find your rhythm.
+          </p>
+        </header>
 
-      {/* ================= HERO SECTION ================= */}
-      <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-
-        {/* BACKGROUND IMAGE LAYER */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-
-          {/* HERO IMAGE — PUSHED DOWN 70% FROM TOP */}
-          <img
-            src={`${import.meta.env.BASE_URL}images/hero/home-hero.png`}
-            alt="Positive Energy Dance Company"
-            className="
-              absolute
-              top-[45%]
-              left-1/2
-              -translate-x-1/2
-              -translate-y-1/2
-              w-full
-              h-[180%]
-              object-cover
-              opacity-60
-            "
-          />
-
-          {/* OVERLAYS */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40"></div>
-          <div className="absolute inset-0 bg-black/30"></div>
-        </div>
-
-        {/* CONTENT */}
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl">
-
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-400/10 border border-primary-400/30 text-primary-400 text-[10px] font-black uppercase tracking-[0.4em] mb-10 backdrop-blur-xl">
-              <Zap size={14} className="fill-primary-400" />
-              San Diego&apos;s Premier Dance Company
-            </div>
-
-            <h1 className="text-6xl md:text-9xl font-serif font-black mb-8 leading-[0.85] tracking-tighter">
-              Dance with <br />
-              <span className="text-primary-400 italic">Positive Energy</span>
-            </h1>
-
-            <p className="max-w-2xl text-xl md:text-2xl text-zinc-100 mb-12 leading-relaxed font-light">
-              Experience the rhythm of San Diego. Professional Latin dance lessons,
-              breathtaking wedding choreography, and elite event entertainment.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-5 mb-16">
-              <Link
-                to="/lessons"
-                className="px-12 py-6 bg-primary-400 hover:bg-white text-black font-black rounded-full flex items-center justify-center gap-3 text-xs uppercase tracking-widest transition-all"
-              >
-                Start Dancing <ArrowRight className="w-5 h-5" />
-              </Link>
-
-              <Link
-                to="/book"
-                className="px-12 py-6 bg-white/5 hover:bg-white/20 text-white font-black rounded-full backdrop-blur-md border border-white/20 flex items-center justify-center gap-3 text-xs uppercase tracking-widest transition-all"
-              >
-                Book for Event
-              </Link>
-            </div>
-
-            <div className="inline-flex items-center gap-6 bg-black/60 p-1.5 pr-8 rounded-full border border-white/10 backdrop-blur-md">
-              <div className="w-12 h-12 rounded-full bg-primary-400 flex items-center justify-center text-black">
-                <Phone size={20} />
-              </div>
-              <div>
-                <span className="block text-[8px] font-black uppercase tracking-[0.5em] text-primary-400/70">
-                  Connect with Michael
-                </span>
-                <a href="tel:6192518863" className="text-xl font-black uppercase tracking-[0.1em] hover:text-primary-400">
-                  (619) 251-8863
-                </a>
-              </div>
-            </div>
-
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-400"></div>
           </div>
-        </div>
-      </section>
-
-      {/* ================= FEATURED EVENTS ================= */}
-      {featuredEvents.length > 0 && (
-        <section className="py-32 bg-zinc-950 border-t border-white/5">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-black uppercase tracking-tighter mb-16 text-center">
-              Upcoming <span className="text-primary-400">Highlights</span>
-            </h2>
-
-            <div className="grid md:grid-cols-3 gap-10">
-              {featuredEvents.map(event => (
-                <div key={event.id} className="rounded-3xl overflow-hidden border border-white/10">
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {instructors.map((inst) => (
+              <div key={inst.id} className="group relative">
+                <div className="aspect-[3/4] overflow-hidden rounded-[2.5rem] relative mb-8 grayscale hover:grayscale-0 transition-all duration-700 bg-zinc-900 border border-white/5 group-hover:border-primary-400/50 shadow-2xl">
                   <img
-                    src={event.flyerUrl}
-                    className="w-full h-96 object-cover"
-                    alt={event.title}
+                    src={getInstructorPhoto(inst)}
+                    alt={inst.name}
+                    onError={(e) => handleImageError(inst.id, e)}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
+                  {/* Warning overlay if image failed */}
+                  {errorIds.has(inst.id) && (
+                    <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 text-center z-10">
+                      <AlertCircle className="text-primary-400 w-12 h-12 mb-4 animate-pulse" />
+                      <p className="text-[10px] font-black uppercase tracking-widest text-primary-400 mb-2">
+                        Image Failed to Load
+                      </p>
+                      <p className="text-[9px] text-zinc-400 uppercase tracking-wider leading-relaxed">
+                        Check filename + location: public/images/instructors/
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+
+                  {/* Float Badge */}
+                  <div className="absolute top-8 right-8 w-12 h-12 bg-primary-400 rounded-2xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                    <Zap className="text-black fill-black" size={20} />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-3xl font-black uppercase tracking-tighter group-hover:text-primary-400 transition-colors">
+                        {inst.name}
+                      </h3>
+                      <p className="text-primary-400 text-[10px] font-black uppercase tracking-widest mt-1">
+                        {inst.role}
+                      </p>
+                    </div>
+                    {inst.instagram && (
+                      <a
+                        href={inst.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-500 hover:text-white transition-colors"
+                      >
+                        <Instagram size={20} />
+                      </a>
+                    )}
+                  </div>
+
+                  <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3">{inst.bio}</p>
+
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {inst.styles.map((style) => (
+                      <span
+                        key={style}
+                        className="px-3 py-1 rounded-full border border-white/5 bg-zinc-950 text-[9px] font-black uppercase tracking-widest text-zinc-600"
+                      >
+                        {style}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default Instructors;
