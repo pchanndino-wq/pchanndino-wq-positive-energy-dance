@@ -41,7 +41,7 @@ const Home: React.FC = () => {
             alt="Positive Energy Dance Company"
             className="
               absolute
-              top-[40%]
+              top-[45%]
               left-1/2
               -translate-x-1/2
               -translate-y-1/2
