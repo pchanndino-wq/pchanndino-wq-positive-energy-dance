@@ -31,7 +31,7 @@ const Instructors: React.FC = () => {
     'anjali': `${BASE}images/instructors/Anjali.png`,
     'sinai': `${BASE}images/instructors/sinai.jpg`,
     'cat chuck': `${BASE}images/instructors/catchuck.jpg`,
-    'michael j saltus': `${BASE}images/instructors/michael.jpg`,
+    'michael j saltus': `${BASE}images/instructors/michael-saltus.jpg`,
   };
 
   // Normalize names so "Michael J. Saltus" matches "michael j saltus"
@@ -54,7 +54,7 @@ const Instructors: React.FC = () => {
     if (key.includes('anjali')) return `${BASE}images/instructors/Anjali.png`;
     if (key.includes('sinai')) return `${BASE}images/instructors/sinai.jpg`;
     if (key.includes('cat') || key.includes('chuck')) return `${BASE}images/instructors/catchuck.jpg`;
-    if (key.includes('michael') || key.includes('saltus')) return `${BASE}images/instructors/michael.jpg`;
+    if (key.includes('michael') || key.includes('saltus')) return `${BASE}images/instructors/michael-saltus.jpg`;
 
     // Final fallback (still local)
     return `${BASE}images/instructors/Anjali.png`;
