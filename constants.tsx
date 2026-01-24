@@ -5,7 +5,7 @@ import { Instructor, LocationSchedule } from './types';
 export const IMAGES = {
   LOGO: "images/logo.png",                         // Logo File
   HERO_BG: "images/hero-outdoor-party.jpg",
-  MICHAEL_HEADSHOT: "images/michael-headshot.jpg", // Needs a file
+  MICHAEL_HEADSHOT: "images/michael-headshot.png", // Needs a file
   GROUP_CLASS: "images/group-class.jpg",           // Needs a file
   SOCIAL_EVENT: "images/social-event.jpg",         // Needs a file
   
