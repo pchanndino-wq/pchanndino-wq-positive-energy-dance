@@ -1,69 +1,52 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Positive Energy Dance Company</title>
-
-    <!-- Tailwind via CDN (Path A: no installs) -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Tailwind config to match your design -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-              serif: ["Playfair Display", "serif"],
-            },
-            colors: {
-              primary: {
-                50: "#fcfaf2",
-                100: "#f7f1db",
-                200: "#eee0b1",
-                300: "#e1c77c",
-                400: "#d4af37",
-                500: "#c5a021",
-                600: "#a38119",
-                700: "#826518",
-                800: "#6a531a",
-                900: "#5b461a",
-              },
-            },
-          },
-        },
-      };
-    </script>
-
-    <!-- Your extra global styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
       body {
-        background-color: #000;
-        color: #fff;
+        font-family: 'Open Sans', sans-serif;
+        background-color: #09090b; /* zinc-950 */
       }
-      .glass {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
       }
-      ::selection {
-        background-color: #d4af37;
-        color: #000;
+      html {
+        scroll-behavior: smooth;
+      }
+      .text-gold {
+        color: #D4AF37;
+      }
+      .bg-gold {
+        background-color: #D4AF37;
+      }
+      .border-gold {
+        border-color: #D4AF37;
+      }
+      .hover-text-gold:hover {
+        color: #F4C430;
+      }
+      .gold-gradient {
+        background: linear-gradient(135deg, #D4AF37 0%, #F4C430 100%);
       }
     </style>
-  </head>
-
-  <body>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-zinc-950 text-zinc-50 antialiased selection:bg-yellow-500 selection:text-black">
     <div id="root"></div>
-
-    <!-- Vite entry file (your project uses index.tsx at the project root) -->
-    <script type="module" src="/index.tsx"></script>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>
